@@ -282,5 +282,208 @@
     <link rel="icon" href="resource/basket.png" />
 </head>
 <body>
-    
+    <div class="container-fluid main-container">
+        <div class="row justify-content-center w-100">
+            <div class="col-lg-10">
+                <div class="auth-container row g-0">
+                    <!-- Left Side - Branding -->
+                    <div class="col-md-5 auth-left">
+                        <div>
+                            <div class="brand-title">
+                                <i class="fas fa-shopping-cart"></i><br>
+                                eShop
+                            </div>
+                            <p class="brand-subtitle">Your Ultimate Shopping Destination</p>
+                            
+                            <div class="mt-4">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Fast Delivery</strong><br>
+                                        <small>Quick and reliable shipping worldwide</small>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Secure Shopping</strong><br>
+                                        <small>Safe and secure transactions</small>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Quality Products</strong><br>
+                                        <small>Authentic and high-quality items</small>
+                                    </div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div>
+                                        <strong>24/7 Support</strong><br>
+                                        <small>Round-the-clock customer service</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side - Forms -->
+                    <div class="col-md-7 auth-right">
+                        <!-- Tab Buttons -->
+                        <div class="text-center mb-4">
+                            <button type="button" class="tab-button active" onclick="showForm('signin')">Sign In</button>
+                            <button type="button" class="tab-button" onclick="showForm('signup')">Sign Up</button>
+                        </div>
+
+                        <!-- Alert Messages -->
+                        <div id="alertContainer"></div>
+
+                        <!-- Sign In Form -->
+                        <div id="signin-form" class="auth-form active">
+                            <h3 class="text-center mb-4">Welcome Back!</h3>
+                            
+                            <form id="signinForm">
+                                <div class="mb-3">
+                                    <label for="signin-email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="signin-email" name="email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="signin-password" class="form-label">Password</label>
+                                    <div class="password-toggle">
+                                        <input type="password" class="form-control" id="signin-password" name="password" required>
+                                        <button type="button" class="toggle-btn" onclick="togglePassword('signin-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="remember-me" name="remember_me">
+                                            <label class="form-check-label" for="remember-me">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-custom mb-3">Sign In</button>
+                                
+                                <div class="text-center">
+                                    <a href="adminSignin.php" class="btn btn-success-custom">Admin Login</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Sign Up Form -->
+                        <div id="signup-form" class="auth-form">
+                            <h3 class="text-center mb-4">Create New Account</h3>
+                            
+                            <form id="signupForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="first-name" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="first-name" name="first_name" placeholder="ex: John" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="last-name" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="last-name" name="last_name" placeholder="ex: Doe" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="signup-email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="signup-email" name="email" placeholder="ex: john@gmail.com" required>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="mobile" class="form-label">Mobile Number</label>
+                                            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="ex: 0771234568" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="gender" class="form-label">Gender</label>
+                                            <select class="form-control gender-select" id="gender" name="gender" required>
+                                                <option value="">Select Gender</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                                <option value="3">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="signup-password" class="form-label">Password</label>
+                                    <div class="password-toggle">
+                                        <input type="password" class="form-control" id="signup-password" name="password" placeholder="Minimum 6 characters" required minlength="6">
+                                        <button type="button" class="toggle-btn" onclick="togglePassword('signup-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                                    <div class="password-toggle">
+                                        <input type="password" class="form-control" id="confirm-password" name="confirm_password" required>
+                                        <button type="button" class="toggle-btn" onclick="togglePassword('confirm-password', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agree-terms" name="agree_terms" required>
+                                    <label class="form-check-label" for="agree-terms">
+                                        I agree to the <a href="#" class="forgot-password">Terms & Conditions</a>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-secondary-custom">Create Account</button>
+                            </form>
+                        </div>
+
+                        <!-- Forgot Password Form -->
+                        <div id="forgot-password-form" class="auth-form">
+                            <h3 class="text-center mb-4">Reset Password</h3>
+                            <p class="text-muted text-center mb-4">Enter your email address and we'll send you a reset link</p>
+                            
+                            <form id="forgotPasswordForm">
+                                <div class="mb-3">
+                                    <label for="forgot-email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="forgot-email" name="email" required>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-custom mb-3">Send Reset Link</button>
+                                
+                                <div class="text-center">
+                                    <a href="#" class="forgot-password" onclick="showForm('signin')">Back to Sign In</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body> 
