@@ -541,6 +541,42 @@
         // Global variables
 let currentForm = 'signin';
 
+// Form switching functions
+function showForm(formType) {
+    document.querySelectorAll('.auth-form').forEach(form => {
+        form.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    if (formType === 'signin') {
+        document.getElementById('signin-form').classList.add('active');
+        document.querySelectorAll('.tab-button')[0].classList.add('active');
+        currentForm = 'signin';
+    } else if (formType === 'signup') {
+        document.getElementById('signup-form').classList.add('active');
+        document.querySelectorAll('.tab-button')[1].classList.add('active');
+        currentForm = 'signup';
+    }
+    
+    clearAlerts();
+}
+
+function showForgotPassword() {
+    document.querySelectorAll('.auth-form').forEach(form => {
+        form.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    document.getElementById('forgot-password-form').classList.add('active');
+    currentForm = 'forgot';
+    clearAlerts();
+}
 
     </script>
 
