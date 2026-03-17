@@ -536,5 +536,13 @@
         <p>&copy; 2024 eShop.lk || All Rights Reserved</p>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global variables
+let currentForm = 'signin';
+
+
+    </script>
+
     
 </body> 
