@@ -530,4 +530,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer-text d-none d-lg-block">
+        <p>&copy; 2024 eShop.lk || All Rights Reserved</p>
+    </div>
+
+    
 </body> 
