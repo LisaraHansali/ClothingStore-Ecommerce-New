@@ -610,6 +610,37 @@ function toggleModalPassword(inputId, buttonId) {
     }
 }
 
+// Alert functions
+function showAlert(message, type = 'danger') {
+    const alertContainer = document.getElementById('alertContainer');
+    const alertDiv = document.createElement('div');
+    
+    const typeMap = {
+        'danger': 'alert-danger',
+        'success': 'alert-success',
+        'warning': 'alert-warning',
+        'info': 'alert-info'
+    };
+    
+    alertDiv.className = `alert ${typeMap[type] || 'alert-danger'} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    alertContainer.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 5000);
+}
+
+function clearAlerts() {
+    const alertContainer = document.getElementById('alertContainer');
+    alertContainer.innerHTML = '';
+}
+
     </script>
 
     
