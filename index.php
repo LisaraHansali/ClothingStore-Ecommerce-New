@@ -486,4 +486,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="fpmodal" tabindex="-1" aria-labelledby="fpmodalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fpmodalLabel">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="resetPasswordForm">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label class="form-label">New Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="np" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="npb" onclick="toggleModalPassword('np', 'npb')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Re-type Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="rnp" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="rnpb" onclick="toggleModalPassword('rnp', 'rnpb')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Verification Code</label>
+                                <input type="text" class="form-control" id="vcode" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="resetPassword()">Reset Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body> 
