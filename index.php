@@ -658,6 +658,67 @@ function validatePassword(password) {
            /^(?=.*[a-zA-Z])(?=.*\d)/.test(password);
 }
 
+// Sign In function
+function signin() {
+    const email = document.getElementById('signin-email').value.trim();
+    const password = document.getElementById('signin-password').value;
+    const rememberMe = document.getElementById('remember-me').checked;
+
+    clearAlerts();
+
+    if (!email || !password) {
+        showAlert('Please fill in all fields.');
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        showAlert('Please enter a valid email address.');
+        return;
+    }
+
+    const submitBtn = document.querySelector('#signinForm button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('remember_me', rememberMe);
+
+    fetch('signInProcess.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
+        if (data.success) {
+            showAlert(data.message, 'success');
+            
+            if (rememberMe) {
+                localStorage.setItem('rememberedEmail', email);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
+
+            setTimeout(() => {
+                window.location.href = data.redirect;
+            }, 2000);
+        } else {
+            showAlert(data.message, 'danger');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        showAlert('An error occurred during sign in. Please try again.', 'danger');
+    });
+}
+
     </script>
 
     
