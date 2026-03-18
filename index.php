@@ -719,6 +719,79 @@ function signin() {
     });
 }
 
+// Sign Up function
+function signup() {
+    console.log('Signup function called'); // Debug line
+    
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const gender = document.getElementById('gender').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const agreeTerms = document.getElementById('agree-terms').checked;
+
+    clearAlerts();
+
+    if (!firstName || !lastName || !email || !mobile || !gender || !password || !confirmPassword) {
+        showAlert('Please fill in all fields.');
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        showAlert('Please enter a valid email address.');
+        return;
+    }
+
+    if (!validateMobile(mobile)) {
+        showAlert('Please enter a valid 10-digit mobile number starting with 0.');
+        return;
+    }
+
+    if (!validatePassword(password)) {
+        showAlert('Password must be at least 6 characters and contain at least one letter and one number.');
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showAlert('Passwords do not match.');
+        return;
+    }
+
+    if (!agreeTerms) {
+        showAlert('Please agree to the Terms & Conditions.');
+        return;
+    }
+
+    const submitBtn = document.querySelector('#signupForm button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('first_name', firstName);
+    formData.append('last_name', lastName);
+    formData.append('email', email);
+    formData.append('mobile', mobile);
+    formData.append('gender', gender);
+    formData.append('password', password);
+    formData.append('confirm_password', confirmPassword);
+    formData.append('agree_terms', agreeTerms);
+
+    fetch('signupProcess.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
+        if (data.success) {
+            showAlert(data.message, 'success');
+            document.getElementById('signupForm').reset();
+            
     </script>
 
     
