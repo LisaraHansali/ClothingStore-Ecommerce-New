@@ -641,6 +641,23 @@ function clearAlerts() {
     alertContainer.innerHTML = '';
 }
 
+// Validation functions
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email) && email.length <= 100;
+}
+
+function validateMobile(mobile) {
+    const cleanMobile = mobile.replace(/\D/g, '');
+    return /^0[0-9]{9}$/.test(cleanMobile);
+}
+
+function validatePassword(password) {
+    return password.length >= 6 && 
+           password.length <= 255 && 
+           /^(?=.*[a-zA-Z])(?=.*\d)/.test(password);
+}
+
     </script>
 
     
