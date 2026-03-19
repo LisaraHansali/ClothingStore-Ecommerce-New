@@ -873,6 +873,28 @@ function createPasswordFeedback() {
     
     return feedback;
 }
+
+// Auto-login check
+function checkAutoLogin() {
+    if (window.location.pathname.includes('index.php') || window.location.pathname === '/') {
+        fetch('checkAutoLogin.php', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.redirect) {
+                showAlert('Welcome back! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 1000);
+            }
+        })
+        .catch(error => {
+            console.log('Auto-login check failed:', error);
+        });
+    }
+}
     </script>
 
     
