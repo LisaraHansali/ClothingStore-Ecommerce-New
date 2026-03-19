@@ -808,6 +808,30 @@ function signup() {
         showAlert('An error occurred during registration. Please try again.', 'danger');
     });
 }
+
+// Forgot Password function
+function forgotPassword() {
+    const email = document.getElementById('forgot-email').value.trim();
+
+    clearAlerts();
+
+    if (!email) {
+        showAlert('Please enter your email address.');
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        showAlert('Please enter a valid email address.');
+        return;
+    }
+
+    showAlert('Verification code sent to your email!', 'success');
+    
+    setTimeout(() => {
+        const modal = new bootstrap.Modal(document.getElementById('fpmodal'));
+        modal.show();
+    }, 1000);
+}
     </script>
 
     
