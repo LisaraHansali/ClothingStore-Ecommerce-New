@@ -860,6 +860,19 @@ function resetPassword() {
     modal.hide();
     showForm('signin');
 }
+
+// Password feedback
+function createPasswordFeedback() {
+    const feedback = document.createElement('small');
+    feedback.id = 'password-feedback';
+    feedback.style.display = 'block';
+    feedback.style.marginTop = '5px';
+    
+    const passwordInput = document.getElementById('signup-password');
+    passwordInput.parentNode.appendChild(feedback);
+    
+    return feedback;
+}
     </script>
 
     
