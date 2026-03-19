@@ -792,6 +792,22 @@ function signup() {
             showAlert(data.message, 'success');
             document.getElementById('signupForm').reset();
             
+            // Redirect to home page after successful registration
+            setTimeout(() => {
+                window.location.href = data.redirect;
+            }, 2000);
+            
+        } else {
+            showAlert(data.message, 'danger');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        showAlert('An error occurred during registration. Please try again.', 'danger');
+    });
+}
     </script>
 
     
