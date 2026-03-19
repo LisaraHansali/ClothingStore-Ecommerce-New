@@ -832,6 +832,34 @@ function forgotPassword() {
         modal.show();
     }, 1000);
 }
+
+// Reset Password function
+function resetPassword() {
+    const newPassword = document.getElementById('np').value;
+    const retypePassword = document.getElementById('rnp').value;
+    const verificationCode = document.getElementById('vcode').value;
+
+    if (!newPassword || !retypePassword || !verificationCode) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    if (!validatePassword(newPassword)) {
+        alert('Password must be at least 6 characters long.');
+        return;
+    }
+
+    if (newPassword !== retypePassword) {
+        alert('Passwords do not match.');
+        return;
+    }
+
+    alert('Password reset successful! Please sign in with your new password.');
+    
+    const modal = bootstrap.Modal.getInstance(document.getElementById('fpmodal'));
+    modal.hide();
+    showForm('signin');
+}
     </script>
 
     
