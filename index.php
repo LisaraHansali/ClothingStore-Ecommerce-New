@@ -998,6 +998,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+     // Mobile number formatting
+    const mobileInput = document.getElementById('mobile');
+    if (mobileInput) {
+        mobileInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.substring(0, 10);
+            this.value = value;
+            
+            if (value.length === 10 && value.startsWith('0')) {
+                this.style.borderColor = '#27ae60';
+            } else if (value.length > 0) {
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.style.borderColor = '#e9ecef';
+            }
+        });
+    }
+});
+
 
 
     </script>
