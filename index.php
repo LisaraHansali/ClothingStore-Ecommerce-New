@@ -1017,9 +1017,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
+// Utility function
+function changeView() {
+    if (currentForm === 'signin') {
+        showForm('signup');
+    } else {
+        showForm('signin');
+    }
+}
 
     </script>
 
-    
 </body> 
