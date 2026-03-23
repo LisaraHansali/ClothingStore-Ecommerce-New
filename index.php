@@ -915,6 +915,23 @@ document.addEventListener('DOMContentLoaded', function() {
      // Check auto-login
     checkAutoLogin();
 
+    // Form event listeners
+    document.getElementById('signinForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        signin();
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Form submitted'); // Debug line
+        signup();
+    });
+
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        forgotPassword();
+    });
+
     
     </script>
 
