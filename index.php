@@ -899,6 +899,15 @@ function checkAutoLogin() {
 // Event listeners and initialization
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded'); // Debug line
+
+    // Load remembered email
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+        document.getElementById('signin-email').value = rememberedEmail;
+        document.getElementById('remember-me').checked = true;
+    }
+
+    
     </script>
 
     
