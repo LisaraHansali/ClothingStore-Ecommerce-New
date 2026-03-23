@@ -974,7 +974,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
+    // Confirm password validation
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword.length === 0) {
+                this.style.borderColor = '#e9ecef';
+                this.setCustomValidity('');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.setCustomValidity('');
+                this.style.borderColor = '#27ae60';
+            }
+        });
+    }
+
+
+
     </script>
 
     
