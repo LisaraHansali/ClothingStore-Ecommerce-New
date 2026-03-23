@@ -907,6 +907,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('remember-me').checked = true;
     }
 
+    // Check for URL hash to show signup form
+    if (window.location.hash === '#signup') {
+        showForm('signup');
+    }
+
     
     </script>
 
