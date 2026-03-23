@@ -932,6 +932,48 @@ document.addEventListener('DOMContentLoaded', function() {
         forgotPassword();
     });
 
+    // Password strength indicator
+    const passwordInput = document.getElementById('signup-password');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let feedback = document.getElementById('password-feedback');
+            
+            if (!feedback) {
+                feedback = createPasswordFeedback();
+            }
+            
+            if (password.length === 0) {
+                feedback.innerHTML = '';
+                return;
+            }
+            
+            let strength = 0;
+            let messages = [];
+            
+            if (password.length >= 6) strength++;
+            else messages.push('At least 6 characters');
+            
+            if (/[a-zA-Z]/.test(password)) strength++;
+            else messages.push('At least one letter');
+            
+            if (/\d/.test(password)) strength++;
+            else messages.push('At least one number');
+            
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+            
+            const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#27ae60'];
+            const labels = ['Weak', 'Fair', 'Good', 'Strong'];
+            
+            feedback.style.color = colors[strength - 1] || '#e74c3c';
+            
+            if (messages.length > 0) {
+                feedback.innerHTML = `Missing: ${messages.join(', ')}`;
+            } else {
+                feedback.innerHTML = `Password strength: ${labels[strength - 1] || 'Weak'}`;
+            }
+        });
+    }
     
     </script>
 
