@@ -895,6 +895,10 @@ function checkAutoLogin() {
         });
     }
 }
+
+// Event listeners and initialization
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded'); // Debug line
     </script>
 
     
