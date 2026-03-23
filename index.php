@@ -912,6 +912,9 @@ document.addEventListener('DOMContentLoaded', function() {
         showForm('signup');
     }
 
+     // Check auto-login
+    checkAutoLogin();
+
     
     </script>
 
