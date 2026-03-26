@@ -560,6 +560,103 @@ $conditions = Database::getMultipleRows("SELECT * FROM product_conditions WHERE 
             previewImages(input);
         });
 
+        // Add event listener for file input change
+        document.getElementById('product-images').addEventListener('change', function() {
+            previewImages(this);
+        });
+        
+        // Form validation and AJAX submission
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Always prevent default to handle with AJAX
+            
+            const title = document.getElementById('title').value.trim();
+            const price = document.getElementById('price').value;
+            const quantity = document.getElementById('quantity').value;
+            const category = document.getElementById('category').value;
+            const condition = document.getElementById('condition').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Client-side validation
+            if (title.length < 10) {
+                showToast('Product title should be at least 10 characters long', 'error');
+                return false;
+            }
+            
+            if (!category) {
+                showToast('Please select a category', 'error');
+                return false;
+            }
+            
+            if (!condition) {
+                showToast('Please select a condition', 'error');
+                return false;
+            }
+            
+            if (parseFloat(price) <= 0) {
+                showToast('Please enter a valid price', 'error');
+                return false;
+            }
+            
+            if (parseInt(quantity) <= 0) {
+                showToast('Please enter a valid quantity', 'error');
+                return false;
+            }
+            
+            if (!terms) {
+                showToast('Please agree to the terms and conditions', 'error');
+                return false;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Adding Product...';
+            submitBtn.disabled = true;
+            
+            // Create FormData object
+            const formData = new FormData(this);
+            
+            // Submit form via AJAX
+            fetch('addProductProcess.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast(data.message, 'success');
+                    
+                    // Show warnings if any
+                    if (data.warnings && data.warnings.length > 0) {
+                        setTimeout(() => {
+                            data.warnings.forEach(warning => {
+                                showToast(warning, 'warning');
+                            });
+                        }, 1000);
+                    }
+                    
+                    // Redirect after success
+                    setTimeout(() => {
+                        window.location.href = data.redirect || 'myProducts.php';
+                    }, 2000);
+                } else {
+                    showToast(data.message || 'An error occurred while adding the product', 'error');
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalBtnContent;
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showToast('An unexpected error occurred. Please try again.', 'error');
+                
+                // Reset button
+                submitBtn.innerHTML = originalBtnContent;
+                submitBtn.disabled = false;
+            });
+        });
+        
         
         
 
