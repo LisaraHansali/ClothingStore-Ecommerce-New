@@ -480,9 +480,90 @@ $conditions = Database::getMultipleRows("SELECT * FROM product_conditions WHERE 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+
+        // Image preview functionality
+        function previewImages(input) {
+            const previewContainer = document.getElementById('image-previews');
+            const previewDiv = document.querySelector('.preview-container');
+            
+            if (input.files && input.files.length > 0) {
+                previewContainer.innerHTML = '';
+                previewDiv.style.display = 'block';
+                
+                // Limit to 5 images
+                const files = Array.from(input.files).slice(0, 5);
+                
+                files.forEach((file, index) => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const imageDiv = document.createElement('div');
+                        imageDiv.className = 'image-preview';
+                        imageDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview ${index + 1}">
+                            <button type="button" class="remove-image" onclick="removeImage(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            ${index === 0 ? '<div class="main-badge">Main</div>' : ''}
+                        `;
+                        previewContainer.appendChild(imageDiv);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                });
+                
+                if (input.files.length > 5) {
+                    showToast('Only first 5 images will be uploaded', 'warning');
+                }
+            }
+        }
         
+        // Remove image preview
+        function removeImage(index) {
+            const input = document.getElementById('product-images');
+            const dt = new DataTransfer();
+            const files = Array.from(input.files);
+            
+            files.forEach((file, i) => {
+                if (i !== index) {
+                    dt.items.add(file);
+                }
+            });
+            
+            input.files = dt.files;
+            previewImages(input);
+            
+            if (input.files.length === 0) {
+                document.querySelector('.preview-container').style.display = 'none';
+            }
+        }
+        
+        // Drag and drop functionality
+        const uploadArea = document.querySelector('.image-upload-area');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            const input = document.getElementById('product-images');
+            input.files = files;
+            previewImages(input);
+        });
 
         
+        
+
+
     </script>
 </body>
 </html>
